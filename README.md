@@ -240,7 +240,7 @@ Expected input data:
 
 ```js
 {
-	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+	amount: Number,			// required, amount in minor units (100 = DKK 1,00)
 	descriptor: String,		// optional, text on client bank statement
 }
 ```
@@ -255,7 +255,7 @@ Expected input data:
 
 ```js
 {
-	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+	amount: Number,			// required, amount in minor units (100 = DKK 1,00)
 	descriptor: String,		// optional, text on client bank statement
 }
 ```
@@ -270,7 +270,7 @@ Expected input data:
 
 ```js
 {
-	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+	amount: Number,			// required, amount in minor units (100 = DKK 1,00)
 }
 ```
 
