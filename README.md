@@ -54,7 +54,7 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 	A human being with email and password as credentials.
 
-	- [Invite a user to a merchant](#invite-user)
+	- [Invite a user to a merchant](#invite-user-to-a-merchant)
 
 - App
 
@@ -78,6 +78,9 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 	An authorization (reservation) of a given amount and subsequent captures,
 	refunds and voids.
 
+	- [Fetch all transactions](#fetch-all-transactions)
+	- [Fetch a transaction](#fetch-a-transaction)
+
 	All transactions have a "trail" property which is a list of actions. You
 	can check the type of the action by looking at a property of the same name
 	(e.g. `trails[0].capture === true`). Each entry also have an `amount`
@@ -88,14 +91,20 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 		The total amount of captures is always less than the transasctions
 		amount.
 
+		- [Capture a transaction](#capture-a-transaction)
+
 	- Refund
 
 		The total amount of refunds is always less than the total amount
 		captured.
 
+		- [Refund a transaction](#refund-a-transaction)
+
 	- Void
 
 		A complete or partial cancellation of the reserved amount.
+
+		- [Void a transaction](#void-a-transaction)
 
 ## Fetch current app
 
@@ -157,7 +166,7 @@ Will return:
 
 You probably want to store one or both of "pk" and "key".
 
-## Invite user
+## Invite user to a merchant
 
 The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
@@ -230,7 +239,7 @@ Will return:
 }
 ```
 
-#### Capture transaction
+#### Capture a transaction
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
@@ -245,7 +254,7 @@ Expected input data:
 }
 ```
 
-#### Refund transaction
+#### Refund a transaction
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/refunds <data>
@@ -260,7 +269,7 @@ Expected input data:
 }
 ```
 
-#### Void transaction
+#### Void a transaction
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/voids <data>
