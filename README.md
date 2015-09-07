@@ -1,12 +1,12 @@
 # Paylike API
 
-## Basics
-
 ### Getting an API key
 
 An API key can be obtained by creating a merchant and adding an app. If your
 app's target audience is third parties, please reach out and we will make your
 app's API key hidden.
+
+The service is located at `https://midgard.paylike.io`.
 
 ### Authenticating
 
@@ -17,7 +17,7 @@ API key as password:
 curl -u :<api-key> <url>
 ```
 
-### Sending data
+### Data (request body)
 
 Request body data can be send with either `application/x-www-form-urlencoded`
 (standard form data) or `application/json` as `Content-Type` header and data
@@ -27,10 +27,22 @@ formatted accordingly:
 curl -X POST -u :<api-key> <url> --data key=val&key2=val2
 ```
 
+Nested properties like `company.country` of a merchant can be provided using
+form data as `company[country]`.
+
+### Response
+
+All successful calls will return a 2xx status code. 4xx is used for errors in
+your end (validation, constraints, etc.) and 5xx is for server errors (please
+report those).
+
 Add header `Accept: application/json` (curl: `-H 'Accept: application/json'`)
 for forward compatibility although the service will return JSON at the moment.
 
-The service is located at `https://midgard.paylike.io`.
+### Pagination
+
+Pagination is achieved using a `limit` and a `skip` parameter (`limit` is
+required where pagination is supported).
 
 ### Amounts
 
@@ -48,6 +60,8 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 	A machine with an API key as credentials.
 
+	- [Fetch app's own data](#fetch-current-app)
+
 - Merchant
 
 	Has a funding bank account and contains all transactions.
@@ -55,9 +69,9 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 	Can have several users and apps associated. All users and apps have
 	complete access to the merchant and to invite and revoke others.
 
-	- [Create a merchant](#create-merchant)
+	- [Create a merchant](#create-a-merchant)
 	- [Fetch all merchants you can access](#fetch-all-merchants)
-	- [Fetch a single merchant](#fetch-a-single-merchant)
+	- [Fetch a merchant](#fetch-a-merchant)
 
 - Transaction
 
@@ -83,7 +97,26 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 		A complete or partial cancellation of the reserved amount.
 
-## Create merchant
+## Fetch current app
+
+Get information about the authenticated app, such as the "pk" and "name".
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/me
+```
+
+Will return:
+
+```js
+{
+	identity: {
+		pk: String,		// unique key for referencing
+		name: String,	// name of you app, if it has one
+	}
+}
+```
+
+## Create a merchant
 
 Make sure to mark accounts as test when implementing.
 
@@ -106,9 +139,6 @@ Expected input data:
 	},
 }
 ```
-
-Nested properties like `company.country` can be provided using form data as
-`company[country]` if not using JSON format.
 
 The created merchant is automatically associated with the creating entity
 (user or app).
@@ -144,46 +174,33 @@ Expected data:
 }
 ```
 
-## Capture transaction
+## Merchants
 
-```shell
-curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
-```
-
-Expected input data:
-
-```js
-{
-	amount: String,			// required, amount in minor units (100 = DKK 1,00)
-	descriptor: String,		// optional, text on client bank statement
-}
-```
-
-Will return 2xx status code on success.
-
-## Fetch all merchants
+### Fetch all merchants
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/identities/<app-pk>/merchants
 ```
 
-## Fetch a single merchant
+### Fetch a merchant
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
 ```
 
-Query parameters: skip (pagination), limit (pagination), live
+Query parameters: (pagination), live
 
-## Fetch all transactions
+## Transactions
+
+### Fetch all transactions
 
 ```shell
 curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
 ```
 
-Query parameters: skip (pagination), limit (pagination)
+Query parameters: (pagination)
 
-## Fetch a single transaction
+### Fetch a transaction
 
 ```shell
 curl -X GET :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>
@@ -213,9 +230,51 @@ Will return:
 }
 ```
 
-All amounts are in minor (e.g. "1000" could be DKK 10,00)
+#### Capture transaction
 
-## Generate link
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
+```
+
+Expected input data:
+
+```js
+{
+	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+	descriptor: String,		// optional, text on client bank statement
+}
+```
+
+#### Refund transaction
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/refunds <data>
+```
+
+Expected input data:
+
+```js
+{
+	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+	descriptor: String,		// optional, text on client bank statement
+}
+```
+
+#### Void transaction
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/voids <data>
+```
+
+Expected input data:
+
+```js
+{
+	amount: String,			// required, amount in minor units (100 = DKK 1,00)
+}
+```
+
+## Generate payment link
 
 For mPOS and payment links the format of the link should conform to:
 
