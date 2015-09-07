@@ -125,7 +125,26 @@ Will return:
 }
 ```
 
-## Create a merchant
+## Invite user to a merchant
+
+The user will receive an email if they are not signed up at Paylike, or if
+they are not a member of the merchant.
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
+```
+
+Expected data:
+
+```js
+{
+	email: String,	// required
+}
+```
+
+## Merchants
+
+### Create a merchant
 
 Make sure to mark accounts as test when implementing.
 
@@ -165,25 +184,6 @@ Will return:
 ```
 
 You probably want to store one or both of "pk" and "key".
-
-## Invite user to a merchant
-
-The user will receive an email if they are not signed up at Paylike, or if
-they are not a member of the merchant.
-
-```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
-```
-
-Expected data:
-
-```js
-{
-	email: String,	// required
-}
-```
-
-## Merchants
 
 ### Fetch all merchants
 
@@ -227,7 +227,7 @@ Will return:
 		refundedAmount: Number,	// refunded (no further action possible)
 		voidedAmount: Number,	// voided (no further action possible)
 		card: {
-			bin: String,
+			bin: String,	// first 6 numbers in PAN (card number)
 			last4: String,
 			expiry: Date,
 			scheme: String, // "visa" or "mastercard"
