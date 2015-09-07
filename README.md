@@ -1,7 +1,5 @@
 # Paylike API
 
-[test](paylike/sdk#browser-support)
-
 ### Getting an API key
 
 An API key can be obtained by creating a merchant and adding an app. If your
