@@ -168,8 +168,25 @@ Expected input data:
 }
 ```
 
-The created merchant is automatically associated with the creating entity
-(user or app).
+#### Country
+
+See https://github.com/paylike/countries for a list of supported countries. It
+also has ISO 3166-1-alpha-2 codes and primary currency of each country.
+
+#### Currency
+
+This is the **funding currency**. Although you can charge customers in any
+currency, all transactions will be exchanged to the funding currency upon
+capture. A list of all supported currencies is available at
+https://github.com/paylike/currencies, notice that only a subset is supported
+for funding (marked by `funding: true`).
+
+#### Descriptor
+
+This is the default text that customers will see in their bank upon a charge,
+if not overwritten when charging or capturing.
+
+See https://github.com/paylike/descriptor for format and restrictions.
 
 Will return:
 
@@ -184,6 +201,9 @@ Will return:
 ```
 
 You probably want to store one or both of "pk" and "key".
+
+The created merchant is automatically associated with the creating entity
+(user or app).
 
 ### Fetch all merchants
 
