@@ -152,7 +152,7 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 Get information about the authenticated app, such as the "pk" and "name".
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/me
+curl :<api-key> https://midgard.paylike.io/me
 ```
 
 Will return:
