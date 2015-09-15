@@ -125,23 +125,6 @@ Will return:
 }
 ```
 
-## Invite user to a merchant
-
-The user will receive an email if they are not signed up at Paylike, or if
-they are not a member of the merchant.
-
-```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
-```
-
-Expected data:
-
-```js
-{
-	email: String,	// required
-}
-```
-
 ## Merchants
 
 ### Create a merchant
@@ -204,6 +187,23 @@ You probably want to store one or both of "pk" and "key".
 
 The created merchant is automatically associated with the creating entity
 (user or app).
+
+### Invite user to a merchant
+
+The user will receive an email if they are not signed up at Paylike, or if
+they are not a member of the merchant.
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
+```
+
+Expected data:
+
+```js
+{
+	email: String,	// required
+}
+```
 
 ### Fetch all merchants
 
