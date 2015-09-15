@@ -31,6 +31,7 @@
 	- [Fetch a transaction](#fetch-a-transaction)
 - [Cards](#cards)
 	- [Save a card](#save-a-card)
+	- [Recurring payments (important information)](#recurring-payments-important-information)
 - [Generate payment link](#generate-payment-link)
 
 ### Getting an API key
@@ -412,6 +413,52 @@ Will return:
 ```
 
 Once you have a card key, you should be able to [create new transactions](#create-a-transaction).
+
+### Recurring payments (important information)
+
+Things you should be aware of:
+
+- recurring payments are not supported by all card issuing banks
+- cards expire
+- a card could be reported stolen between payments
+- the card may not have sufficient funds
+- a host of things will go wrong
+
+Your flow should gracely handle these failures and allow affected users to pay
+with another card.
+
+This is the reason you should avoid using the "save card" part of our frontend
+SDK for anything else than updating the card of an existing customer - the
+transaction is **more likely to be successful with a regular payment**.
+
+Instead present the user with the initial payment and ask your user whether
+they want to subscribe to future payments. On the next payment you simply try
+creating a transaction - if it fails, ask the user to do the payment manually
+and restart the process.
+
+An example flow could look like this:
+
+1. A payment popup is shown or a payment link is generated
+2. The user is asked to save their card for future payments
+3. (async/server side) [Save the card](#save-a-card) from the transaction key
+4. (async/server side) Capture the transaction
+
+	This step should be completed only when your services or your goods are
+	dispatched to the customer.
+
+5. (future payment/server side)
+
+	[Create a transaction](#create-a-transaction) based on the card key
+	obtained in 3. and capture it, if it fails for whatever reason (expired,
+	not supported, insufficient funds, etc.), notify the customer by email or
+	other means and restart the process from 1.
+
+You do not need to do clever stuff about expiration if you follow this flow -
+cards will fail for whatever reason and be replaced by the customer.
+
+You could enhance the flow by creating subsequent payments a bit earlier to
+warn the user if an upcoming payment will fail and the card needs replaced.
+Delay the capture for the actual renewal date.
 
 ## Generate payment link
 
