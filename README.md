@@ -8,6 +8,11 @@
 	- [Pagination](#pagination)
 	- [Amounts](#amounts)
 - [Types](#types)
+	- User
+	- App
+	- Merchant
+	- Transaction
+	- Card
 - [Fetch current app](#fetch-current-app)
 - [Merchants](#merchants)
 	- [Create a merchant](#create-a-merchant)
