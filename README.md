@@ -440,8 +440,8 @@ An example flow could look like this:
 
 1. A payment popup is shown or a payment link is generated
 2. The user is asked to save their card for future payments
-3. (async/server side) [Save the card](#save-a-card) from the transaction key
-4. (async/server side) Capture the transaction
+3. *async/server side* [Save the card](#save-a-card) from the transaction key
+4. *async/server side* Capture the transaction
 
 	This step should be completed only when your services or your goods are
 	dispatched to the customer.
