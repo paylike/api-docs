@@ -152,7 +152,7 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 Get information about the authenticated app, such as the "pk" and "name".
 
 ```shell
-curl :<api-key> https://midgard.paylike.io/me
+curl -u :<api-key> https://midgard.paylike.io/me
 ```
 
 Will return:
@@ -173,7 +173,7 @@ Will return:
 Make sure to mark accounts as test when implementing.
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants <data>
 ```
 
 Expected input data:
@@ -235,7 +235,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
 ```
 
 Expected data:
@@ -249,13 +249,13 @@ Expected data:
 ### Fetch all merchants
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/identities/<app-pk>/merchants
+curl -X POST -u :<api-key> https://midgard.paylike.io/identities/<app-pk>/merchants
 ```
 
 ### Fetch a merchant
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
 ```
 
 Query parameters: (pagination), live
@@ -271,7 +271,7 @@ Creating transactions is only used for recurring payments. In order to create
 a transaction, you will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
 ```
 
 Expected input data:
@@ -300,7 +300,7 @@ Will return:
 #### Capture a transaction
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
 ```
 
 Expected input data:
@@ -315,7 +315,7 @@ Expected input data:
 #### Refund a transaction
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/refunds <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/refunds <data>
 ```
 
 Expected input data:
@@ -330,7 +330,7 @@ Expected input data:
 #### Void a transaction
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/voids <data>
+curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/voids <data>
 ```
 
 Expected input data:
@@ -344,7 +344,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
 ```
 
 Query parameters: (pagination)
@@ -352,7 +352,7 @@ Query parameters: (pagination)
 ### Fetch a transaction
 
 ```shell
-curl -X GET :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>
+curl -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>
 ```
 
 Will return:
@@ -389,7 +389,7 @@ you do not have to do anything further - the card will be in your vault.
 The instructions below are for saving a card from an earlier transaction.
 
 ```shell
-curl -X POST :<api-key> /merchants/<merchant-pk>/cards <data>
+curl -X POST -u :<api-key> /merchants/<merchant-pk>/cards <data>
 ```
 
 Expected input data:
