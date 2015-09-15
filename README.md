@@ -221,18 +221,28 @@ Query parameters: (pagination), live
 
 ## Transactions
 
-### Fetch all transactions
+### Create a transaction
+
+When using [payment links](#generate-payment-link) or our [frontend SDK](https://github.com/paylike/sdk)
+you do not need to create any transactions.
+
+Creating transactions is only used for recurring payments. In order to create
+a transaction, you will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
+curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
 ```
 
-Query parameters: (pagination)
+Expected input data:
 
-### Fetch a transaction
-
-```shell
-curl -X GET :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>
+```js
+{
+	cardPk: String,			// required
+	descriptor: String,		// optional, will fallback to merchant descriptor
+	currency: String,		// required, three letter ISO
+	amount: Number,			// required, amount in minor units
+	custom:	Object,			// optional, any custom reference or data
+}
 ```
 
 Will return:
@@ -240,21 +250,8 @@ Will return:
 ```js
 {
 	transaction: {
-		pk: String,
-		amount: Number,
-		pendingAmount: Number,	// available for capture or void
-		capturedAmount: Number,	// captured (available for refund)
-		refundedAmount: Number,	// refunded (no further action possible)
-		voidedAmount: Number,	// voided (no further action possible)
-		card: {
-			bin: String,	// first 6 numbers in PAN (card number)
-			last4: String,
-			expiry: Date,
-			scheme: String, // "visa" or "mastercard"
-		},
-		currency: "USD",
-		custom: Object,		// custom data
-		trail: Array,		// list of all captures, voids and refunds
+		pk: String,		// unique key for referencing
+		...,			// more..
 	}
 }
 ```
@@ -300,6 +297,77 @@ Expected input data:
 ```js
 {
 	amount: Number,			// required, amount in minor units (100 = DKK 1,00)
+}
+```
+
+### Fetch all transactions
+
+```shell
+curl -X POST :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
+```
+
+Query parameters: (pagination)
+
+### Fetch a transaction
+
+```shell
+curl -X GET :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>
+```
+
+Will return:
+
+```js
+{
+	transaction: {
+		pk: String,
+		amount: Number,
+		pendingAmount: Number,	// available for capture or void
+		capturedAmount: Number,	// captured (available for refund)
+		refundedAmount: Number,	// refunded (no further action possible)
+		voidedAmount: Number,	// voided (no further action possible)
+		card: {
+			bin: String,	// first 6 numbers in PAN (card number)
+			last4: String,
+			expiry: Date,
+			scheme: String, // "visa" or "mastercard"
+		},
+		currency: "USD",
+		custom: Object,		// custom data
+		trail: Array,		// list of all captures, voids and refunds
+	}
+}
+```
+
+## Cards
+
+### Save a card
+
+When using our [frontend SDK](https://github.com/paylike/sdk) for saving cards
+you do not have to do anything further - the card will be in your vault.
+
+The instructions below are for saving a card from an earlier transaction.
+
+```shell
+curl -X POST :<api-key> /merchants/<merchant-pk>/cards <data>
+```
+
+Expected input data:
+
+```js
+{
+	transactionPk: String,	// required
+	notes: String,			// optional
+}
+```
+
+Will return:
+
+```js
+{
+	card: {
+		pk: String,		// unique key for referencing
+		...,			// more..
+	}
 }
 ```
 
