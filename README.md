@@ -3,7 +3,7 @@
 - Basics
 	- [Getting an API key](#getting-an-api-key)
 	- [Authenticating](#authenticating)
-	- [Data (request body)](#data-(request-body))
+	- [Data (request body)](#data-request-body)
 	- [Response](#response)
 	- [Pagination](#pagination)
 	- [Amounts](#amounts)
