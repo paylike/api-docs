@@ -1,5 +1,33 @@
 # Paylike API
 
+- Basics
+	- [Getting an API key](#getting-an-api-key)
+	- [Authenticating](#authenticating)
+	- [Data (request body)](#data-(request-body))
+	- [Response](#response)
+	- [Pagination](#pagination)
+	- [Amounts](#amounts)
+- [Types](#types)
+- [Fetch current app](#fetch-current-app)
+- [Merchants](#merchants)
+	- [Create a merchant](#create-a-merchant)
+		- [Country](#country)
+		- [Currency](#currency)
+		- [Descriptor](#descriptor)
+	- [Invite user to a merchant](#invite-user-to-a-merchant)
+	- [Fetch all merchants](#fetch-all-merchants)
+	- [Fetch a merchant](#fetch-a-merchant)
+- [Transactions](#transactions)
+	- [Create a transaction](#create-a-transaction)
+		- [Capture a transaction](#capture-a-transaction)
+		- [Refund a transaction](#refund-a-transaction)
+		- [Void a transaction](#void-a-transaction)
+	- [Fetch all transactions](#fetch-all-transactions)
+	- [Fetch a transaction](#fetch-a-transaction)
+- [Cards](#cards)
+	- [Save a card](#save-a-card)
+- [Generate payment link](#generate-payment-link)
+
 ### Getting an API key
 
 An API key can be obtained by creating a merchant and adding an app. If your
