@@ -134,6 +134,13 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 		- [Void a transaction](#void-a-transaction)
 
+- Card
+
+	A card is.. a credit card.
+
+	- [Save a card](#save-a-card)
+	- [Create a transaction](#create-a-transaction)
+
 ## Fetch current app
 
 Get information about the authenticated app, such as the "pk" and "name".
@@ -398,6 +405,8 @@ Will return:
 	}
 }
 ```
+
+Once you have a card key, you should be able to [create new transactions](#create-a-transaction).
 
 ## Generate payment link
 
