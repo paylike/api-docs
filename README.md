@@ -189,6 +189,9 @@ Expected input data:
 	company: {
 		country: String,	// required, the English name of an EU country (e.g. Denmark)
 	},
+	bank: {					// optional
+		iban: String,		// optional, (format: XX00000000, XX is country code, length varies)
+	},
 }
 ```
 
