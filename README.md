@@ -31,7 +31,7 @@
 	- [Fetch a transaction](#fetch-a-transaction)
 - [Cards](#cards)
 	- [Save a card](#save-a-card)
-	- [Recurring payments (important information)](#recurring-payments-important-information)
+- [Recurring payments](#recurring-payments)
 - [Generate payment link](#generate-payment-link)
 
 ### Getting an API key
@@ -271,8 +271,43 @@ curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
 When using [payment links](#generate-payment-link) or our [frontend SDK](https://github.com/paylike/sdk)
 you do not need to create any transactions.
 
-Creating transactions is only used for recurring payments. In order to create
-a transaction, you will first need to [obtain a card key](#save-a-card).
+Creating transactions is only used for [recurring payments](#recurring-payments).
+
+#### From a previous transaction
+
+```shell
+curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
+```
+
+Expected input data:
+
+```js
+{
+	transactionPk: String,	// required
+	descriptor: String,		// optional, will fallback to merchant descriptor
+	currency: String,		// required, three letter ISO
+	amount: Number,			// required, amount in minor units
+	custom:	Object,			// optional, any custom data
+}
+```
+
+Will return:
+
+```js
+{
+	transaction: {
+		pk: String,		// unique key for referencing
+		...,			// more..
+	}
+}
+```
+
+#### From a saved card
+
+Using a previous transaction is, in most cases, superior to saving a card due
+to the extra work involed.
+
+You will first need to [obtain a card key](#save-a-card).
 
 ```shell
 curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
@@ -418,7 +453,7 @@ Will return:
 
 Once you have a card key, you should be able to [create new transactions](#create-a-transaction).
 
-### Recurring payments (important information)
+## Recurring payments
 
 Things you should be aware of:
 
@@ -442,27 +477,27 @@ and restart the process.
 
 An example flow could look like this:
 
-1. A payment popup is shown or a payment link is generated
-2. The user is asked to save their card for future payments
-3. *async/server side* [Save the card](#save-a-card) from the transaction key
-4. *async/server side* Capture the transaction
+1. (client) A payment popup is shown or a payment link is generated
+2. (client) The user is asked whether to save their card for future payments
+3. (server) Save transaction
+4. (server/async) Capture the transaction
 
 	This step should be completed only when your services or your goods are
 	dispatched to the customer.
 
-5. (future payment/server side)
+5. (server/async) Recurring payment
 
-	[Create a transaction](#create-a-transaction) based on the card key
-	obtained in 3. and capture it, if it fails for whatever reason (expired,
+	[Create a transaction](#create-a-transaction) based on the previous transaction key
+	saved in 3. and capture it, if it fails for whatever reason (expired,
 	not supported, insufficient funds, etc.), notify the customer by email or
 	other means and restart the process from 1.
 
 You do not need to do clever stuff about expiration if you follow this flow -
 cards will fail for whatever reason and be replaced by the customer.
 
-You could enhance the flow by creating subsequent payments a bit earlier to
-warn the user if an upcoming payment will fail and the card needs replaced.
-Delay the capture for the actual renewal date.
+You could enhance the flow by creating rrecurring payments a bit earlier to
+warn the user if an upcoming payment will fail and needs to be completed
+manually. Delay the capture for the actual renewal date.
 
 ## Generate payment link
 
