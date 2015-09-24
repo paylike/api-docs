@@ -188,6 +188,7 @@ Expected input data:
 	descriptor: String,		// required, text on client bank statements
 	company: {
 		country: String,	// required, the English name of an EU country (e.g. Denmark)
+		number: String,		// optional, registration number ("CVR" in Denmark)
 	},
 	bank: {					// optional
 		iban: String,		// optional, (format: XX00000000, XX is country code, length varies)
