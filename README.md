@@ -347,9 +347,15 @@ Expected input data:
 ```js
 {
 	amount: Number,			// required, amount in minor units (100 = DKK 1,00)
+	currency: String,		// optional, expected currency (for additional verification)
 	descriptor: String,		// optional, text on client bank statement
 }
 ```
+
+The only acceptable value for `currency` is that of the transaction itself.
+The attribute is provied to make sure a user did not tamper with the currency
+during authorization. This way, if the capture succeeds, you are guaranteed to
+have at least the right amount of money.
 
 #### Refund a transaction
 
