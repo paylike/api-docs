@@ -187,7 +187,7 @@ Expected input data:
 	website: String,		// required, website with implementation
 	descriptor: String,		// required, text on client bank statements
 	company: {
-		country: String,	// required, the English name of an EU country (e.g. Denmark)
+		country: String,	// required, ISO 3166 code (e.g. DK)
 		number: String,		// optional, registration number ("CVR" in Denmark)
 	},
 	bank: {					// optional
@@ -198,8 +198,8 @@ Expected input data:
 
 #### Country
 
-See https://github.com/paylike/countries for a list of supported countries. It
-also has ISO 3166-1-alpha-2 codes and primary currency of each country.
+See https://github.com/paylike/countries for a list of supported countries,
+their code and official currency.
 
 #### Currency
 
