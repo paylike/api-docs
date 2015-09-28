@@ -114,6 +114,7 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 	- [Fetch all transactions](#fetch-all-transactions)
 	- [Fetch a transaction](#fetch-a-transaction)
+	- [Create a transaction (recurring)](#create-a-transaction)
 
 	All transactions have a "trail" property which is a list of actions. You
 	can check the type of the action by looking at a property of the same name
