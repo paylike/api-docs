@@ -254,7 +254,7 @@ Expected data:
 ### Fetch all merchants
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/identities/<app-pk>/merchants
+curl -u :<api-key> https://midgard.paylike.io/identities/<app-pk>/merchants
 ```
 
 Query parameters: [pagination](#pagination)
@@ -262,7 +262,7 @@ Query parameters: [pagination](#pagination)
 ### Fetch a merchant
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
+curl -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>
 ```
 
 ## Transactions
@@ -390,7 +390,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
+curl -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions
 ```
 
 Query parameters: [pagination](#pagination)
