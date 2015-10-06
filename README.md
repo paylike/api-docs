@@ -162,7 +162,7 @@ Will return:
 {
 	identity: {
 		pk: String,		// unique key for referencing
-		name: String,	// name of you app, if it has one
+		name: String,	// name of your app, if it has one
 	}
 }
 ```
