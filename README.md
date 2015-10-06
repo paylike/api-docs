@@ -40,7 +40,7 @@ An API key can be obtained by creating a merchant and adding an app. If your
 app's target audience is third parties, please reach out and we will make your
 app's API key hidden.
 
-The service is located at `https://midgard.paylike.io`.
+**The service is located at `https://midgard.paylike.io`.**
 
 ### Authenticating
 
@@ -58,7 +58,7 @@ Request body data can be send with either `application/x-www-form-urlencoded`
 formatted accordingly:
 
 ```shell
-curl -X POST -u :<api-key> <url> --data key=val&key2=val2
+curl -u :<api-key> -X POST <url> --data "key=val&key2=val2"
 ```
 
 Nested properties like `company.country` of a merchant can be provided using
@@ -174,7 +174,7 @@ Will return:
 Make sure to mark accounts as test when implementing.
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/merchants --data "<data>"
 ```
 
 Expected input data:
@@ -240,7 +240,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<pk>/invite <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/merchants/<pk>/invite --data "<data>"
 ```
 
 Expected data:
@@ -277,7 +277,7 @@ Creating transactions is only used for [recurring payments](#recurring-payments)
 #### From a previous transaction
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/merchants/<merchant-pk>/transactions --data "<data>"
 ```
 
 Expected input data:
@@ -311,7 +311,7 @@ to the extra work involed.
 You will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/merchants/<merchant-pk>/transactions <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/merchants/<merchant-pk>/transactions --data "<data>"
 ```
 
 Expected input data:
@@ -340,7 +340,7 @@ Will return:
 #### Capture a transaction
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/captures <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/transactions/<transaction-pk>/captures --data "<data>"
 ```
 
 Expected input data:
@@ -361,7 +361,7 @@ have at least the right amount of money.
 #### Refund a transaction
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/refunds <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/transactions/<transaction-pk>/refunds --data "<data>"
 ```
 
 Expected input data:
@@ -376,7 +376,7 @@ Expected input data:
 #### Void a transaction
 
 ```shell
-curl -X POST -u :<api-key> https://midgard.paylike.io/transactions/<transaction-pk>/voids <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/transactions/<transaction-pk>/voids --data "<data>"
 ```
 
 Expected input data:
@@ -435,7 +435,7 @@ you do not have to do anything further - the card will be in your vault.
 The instructions below are for saving a card from an earlier transaction.
 
 ```shell
-curl -X POST -u :<api-key> /merchants/<merchant-pk>/cards <data>
+curl -u :<api-key> -X POST https://midgard.paylike.io/merchants/<merchant-pk>/cards --data "<data>"
 ```
 
 Expected input data:
