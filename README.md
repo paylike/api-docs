@@ -1,4 +1,4 @@
-# Paylike API
+# Paylike API reference
 
 Clients:
 
