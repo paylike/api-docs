@@ -7,6 +7,13 @@ Clients:
 Building a client in [insert your favourite language here]? Reach out
 (hello@paylike.io), we might consider sponsoring the maintenance.
 
+**Make sure to [subscribe to our mailling list](http://eepurl.com/bCGmg1)
+for deprecation notices, API changes and new features**, or you can watch this repository for changes.
+
+Backwards incompatible changes including migration paths will be announced on
+the mailing list and here 6 months in advance. This way you will always have
+at least half a year to update your system.
+
 - Basics
 	- [Getting an API key](#getting-an-api-key)
 	- [Authenticating](#authenticating)
