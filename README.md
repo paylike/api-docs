@@ -1,5 +1,12 @@
 # Paylike API
 
+Clients:
+
+- Node.js: https://github.com/paylike/node-api (official)
+
+Building a client in [insert your favourite language here]? Reach out
+(hello@paylike.io), we might consider sponsoring the maintenance.
+
 - Basics
 	- [Getting an API key](#getting-an-api-key)
 	- [Authenticating](#authenticating)
