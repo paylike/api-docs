@@ -281,7 +281,7 @@ curl -i https://api.paylike.io/identities/<app-pk>/merchants \
 	-u :<api-key>
 ```
 
-Query parameters: [pagination](#pagination)
+Query parameters: [pagination](#pagination) (required)
 
 ### Fetch a merchant
 
@@ -429,7 +429,7 @@ curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key>
 ```
 
-Query parameters: [pagination](#pagination)
+Query parameters: [pagination](#pagination) (required)
 
 ### Fetch a transaction
 
