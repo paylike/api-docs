@@ -171,7 +171,7 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 Get information about the authenticated app, such as the "pk" and "name".
 
 ```shell
-curl https://api.paylike.io/me \
+curl -i https://api.paylike.io/me \
 	-u :<api-key>
 ```
 
@@ -193,7 +193,7 @@ Will return:
 Make sure to mark accounts as test when implementing.
 
 ```shell
-curl https://api.paylike.io/merchants \
+curl -i https://api.paylike.io/merchants \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -261,7 +261,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl https://api.paylike.io/merchants/<pk>/invite \
+curl -i https://api.paylike.io/merchants/<pk>/invite \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -277,7 +277,7 @@ Expected data:
 ### Fetch all merchants
 
 ```shell
-curl https://api.paylike.io/identities/<app-pk>/merchants \
+curl -i https://api.paylike.io/identities/<app-pk>/merchants \
 	-u :<api-key>
 ```
 
@@ -286,7 +286,7 @@ Query parameters: [pagination](#pagination)
 ### Fetch a merchant
 
 ```shell
-curl https://api.paylike.io/merchants/<merchant-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-pk> \
 	-u :<api-key>
 ```
 
@@ -302,7 +302,7 @@ Creating transactions is only used for [recurring payments](#recurring-payments)
 #### From a previous transaction
 
 ```shell
-curl https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -338,7 +338,7 @@ to the extra work involed.
 You will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -369,7 +369,7 @@ Will return:
 #### Capture a transaction
 
 ```shell
-curl https://api.paylike.io/transactions/<transaction-pk>/captures \
+curl -i https://api.paylike.io/transactions/<transaction-pk>/captures \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -392,7 +392,7 @@ have at least the right amount of money.
 #### Refund a transaction
 
 ```shell
-curl https://api.paylike.io/transactions/<transaction-pk>/refunds \
+curl -i https://api.paylike.io/transactions/<transaction-pk>/refunds \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -409,7 +409,7 @@ Expected input data:
 #### Void a transaction
 
 ```shell
-curl https://api.paylike.io/transactions/<transaction-pk>/voids \
+curl -i https://api.paylike.io/transactions/<transaction-pk>/voids \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -425,7 +425,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key>
 ```
 
@@ -472,7 +472,7 @@ you do not have to do anything further - the card will be in your vault.
 The instructions below are for saving a card from an earlier transaction.
 
 ```shell
-curl /merchants/<merchant-pk>/cards \
+curl -i /merchants/<merchant-pk>/cards \
 	-u :<api-key> \
 	-d <data>
 ```
