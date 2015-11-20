@@ -581,7 +581,7 @@ Will return:
 }
 ```
 
-Once you have a card key, you should be able to [create new transactions](#create-a-transaction).
+Once you have a card key, you will be able to [create new transactions](#create-a-transaction).
 
 ## Recurring payments
 
