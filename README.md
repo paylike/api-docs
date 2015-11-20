@@ -126,7 +126,7 @@ Expected input data:
 }
 ```
 
-Supply a name if your developing a third party app. It will then be shown
+Supply a name if you are developing a third party app. It will then be shown
 instead of the app's key (which you should always keep secret).
 
 ```js
