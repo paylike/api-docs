@@ -110,6 +110,35 @@ All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
 A machine with an API key as credentials.
 
+### Create an app
+
+```shell
+curl -i https://api.paylike.io/apps \
+	-u :<api-key> \
+	-d <data>
+```
+
+Expected input data:
+
+```js
+{
+	name: String,			// optional
+}
+```
+
+Supply a name if your developing a third party app. It will then be shown
+instead of the app's key (which you should always keep secret).
+
+```js
+{
+	app: {
+		pk: String,		// unique key for referencing
+		name: String,
+		key: String,	// secret key used for authentication
+	}
+}
+```
+
 ### Fetch current app
 
 Get information about the authenticated app, such as the "pk" and "name".
@@ -204,7 +233,47 @@ You probably want to store one or both of "pk" and "key".
 The created merchant is automatically associated with the creating entity
 (user or app).
 
-### Invite user to a merchant
+### Update a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants \
+	-X PUT \
+	-u :<api-key> \
+	-d <data>
+```
+
+Expected input data (all optional):
+
+```js
+{
+	name: String,
+	email: String,
+	descriptor: String,
+}
+```
+
+All other data on the merchant is immutable. Create a new merchant or contact
+us if you need it changed.
+
+### Fetch all merchants
+
+```shell
+curl -i https://api.paylike.io/identities/<app-pk>/merchants \
+	-u :<api-key>
+```
+
+Query parameters: [pagination](#pagination) (required)
+
+### Fetch a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants/<merchant-pk> \
+	-u :<api-key>
+```
+
+### Merchant's users
+
+#### Invite user to a merchant
 
 The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
@@ -223,21 +292,71 @@ Expected data:
 }
 ```
 
-### Fetch all merchants
+#### Revoke user from a merchant
 
 ```shell
-curl -i https://api.paylike.io/identities/<app-pk>/merchants \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
+	-X DELETE \
+	-u :<api-key>
+```
+
+#### Fetch all users on a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants/<merchant-pk>/users \
 	-u :<api-key>
 ```
 
 Query parameters: [pagination](#pagination) (required)
 
-### Fetch a merchant
+### Merchant's apps
+
+#### Add app to a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/apps \
+	-u :<api-key> \
+	-d <data>
+```
+
+Expected data:
+
+```js
+{
+	appPk: String,	// required
+}
+```
+
+#### Revoke app from a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
+	-X DELETE \
 	-u :<api-key>
 ```
+
+#### Fetch all apps on a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants/<merchant-pk>/apps \
+	-u :<api-key>
+```
+
+Query parameters: [pagination](#pagination) (required)
+
+### Merchant's lines
+
+This is the history that makes up a merchant's balance. Captures, refunds,
+payouts and other fincancial transactions are all represented by a line.
+
+#### Fetch all lines on a merchant
+
+```shell
+curl -i https://api.paylike.io/merchants/<merchant-pk>/lines \
+	-u :<api-key>
+```
+
+Query parameters: [pagination](#pagination) (required)
 
 ## Transactions
 
