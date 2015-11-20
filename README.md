@@ -236,7 +236,7 @@ The created merchant is automatically associated with the creating entity
 ### Update a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants \
+curl -i https://api.paylike.io/merchants/<merchant-pk> \
 	-X PUT \
 	-u :<api-key> \
 	-d <data>
