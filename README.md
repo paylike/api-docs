@@ -445,7 +445,7 @@ Will return:
 
 #### Capture a transaction
 
-The total amount of captures is always less than the transasctions amount.
+The total amount of captures is always less than the transaction's amount.
 
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-pk>/captures \
