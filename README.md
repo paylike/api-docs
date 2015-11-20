@@ -40,7 +40,6 @@ at least half a year to update your system.
 		- [Fetch all apps on a merchant](#fetch-all-apps-on-a-merchant)
 	- [Lines](#merchants-lines)
 		- [Fetch all lines on a merchant](#fetch-all-lines-on-a-merchant)
-	- [Add app to a merchant](#add-app-to-a-merchant)
 	- [Fetch all merchants](#fetch-all-merchants)
 	- [Fetch a merchant](#fetch-a-merchant)
 - [Transactions](#transactions)
