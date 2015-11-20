@@ -279,7 +279,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl -i https://api.paylike.io/merchants/<pk>/invite \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/invite \
 	-u :<api-key> \
 	-d <data>
 ```
