@@ -21,13 +21,8 @@ at least half a year to update your system.
 	- [Response](#response)
 	- [Pagination](#pagination)
 	- [Amounts](#amounts)
-- [Types](#types)
-	- User
-	- App
-	- Merchant
-	- Transaction
-	- Card
-- [Fetch current app](#fetch-current-app)
+- [Apps](#apps)
+	- [Fetch current app](#fetch-current-app)
 - [Merchants](#merchants)
 	- [Create a merchant](#create-a-merchant)
 		- [Country](#country)
@@ -100,73 +95,11 @@ required where pagination is supported).
 
 All amounts are represented in minor (e.g. "DKK 9.95" is represented as 995).
 
-## Types
+## Apps
 
-- User
+A machine with an API key as credentials.
 
-	A human being with email and password as credentials.
-
-	- [Invite a user to a merchant](#invite-user-to-a-merchant)
-
-- App
-
-	A machine with an API key as credentials.
-
-	- [Fetch app's own data](#fetch-current-app)
-
-- Merchant
-
-	Has a funding bank account and contains all transactions.
-
-	Can have several users and apps associated. All users and apps have
-	complete access to the merchant and to invite and revoke others.
-
-	- [Create a merchant](#create-a-merchant)
-	- [Fetch all merchants you can access](#fetch-all-merchants)
-	- [Fetch a merchant](#fetch-a-merchant)
-
-- Transaction
-
-	An authorization (reservation) of a given amount and subsequent captures,
-	refunds and voids.
-
-	- [Fetch all transactions](#fetch-all-transactions)
-	- [Fetch a transaction](#fetch-a-transaction)
-	- [Create a transaction (recurring)](#create-a-transaction)
-
-	All transactions have a "trail" property which is a list of actions. You
-	can check the type of the action by looking at a property of the same name
-	(e.g. `trails[0].capture === true`). Each entry also have an `amount`
-	property. The types are:
-
-	- Capture
-
-		The total amount of captures is always less than the transasctions
-		amount.
-
-		- [Capture a transaction](#capture-a-transaction)
-
-	- Refund
-
-		The total amount of refunds is always less than the total amount
-		captured.
-
-		- [Refund a transaction](#refund-a-transaction)
-
-	- Void
-
-		A complete or partial cancellation of the reserved amount.
-
-		- [Void a transaction](#void-a-transaction)
-
-- Card
-
-	A card is.. a credit card.
-
-	- [Save a card](#save-a-card)
-	- [Create a transaction](#create-a-transaction)
-
-## Fetch current app
+### Fetch current app
 
 Get information about the authenticated app, such as the "pk" and "name".
 
@@ -187,6 +120,11 @@ Will return:
 ```
 
 ## Merchants
+
+Has a funding bank account and contains all transactions.
+
+Can have several users and apps associated. All users and apps have complete
+access to the merchant and to invite and revoke others.
 
 ### Create a merchant
 
@@ -292,6 +230,14 @@ curl -i https://api.paylike.io/merchants/<merchant-pk> \
 
 ## Transactions
 
+An authorization (reservation) of a given amount and subsequent captures,
+refunds and voids.
+
+All transactions have a "trail" property which is a list of actions. You can
+check the type of the action by looking at a property of the same name (e.g.
+`transaction.trails[0].capture === true`). Each entry also have an `amount`
+property.
+
 ### Create a transaction
 
 When using [payment links](#generate-payment-link) or our [frontend SDK](https://github.com/paylike/sdk)
@@ -368,6 +314,8 @@ Will return:
 
 #### Capture a transaction
 
+The total amount of captures is always less than the transasctions amount.
+
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-pk>/captures \
 	-u :<api-key> \
@@ -391,6 +339,8 @@ have at least the right amount of money.
 
 #### Refund a transaction
 
+The total amount of refunds is always less than the total amount captured.
+
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-pk>/refunds \
 	-u :<api-key> \
@@ -407,6 +357,8 @@ Expected input data:
 ```
 
 #### Void a transaction
+
+A complete or partial cancellation of the reserved amount.
 
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-pk>/voids \
@@ -463,6 +415,8 @@ Will return:
 ```
 
 ## Cards
+
+A card is.. a credit card.
 
 ### Save a card
 
