@@ -259,7 +259,7 @@ us if you need it changed.
 ### Fetch all merchants
 
 ```shell
-curl -i https://api.paylike.io/identities/<app-pk>/merchants \
+curl -i https://api.paylike.io/identities/<app-pk>/merchants?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -304,7 +304,7 @@ curl -i https://api.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
 #### Fetch all users on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/users \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/users?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -339,7 +339,7 @@ curl -i https://api.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
 #### Fetch all apps on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/apps \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/apps?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -353,7 +353,7 @@ payouts and other fincancial transactions are all represented by a line.
 #### Fetch all lines on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/lines \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/lines?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -508,7 +508,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions?limit=<num> \
 	-u :<api-key>
 ```
 
