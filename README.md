@@ -642,11 +642,15 @@ https://pos.paylike.io/
 &reference=<text shown in dashboard>
 &text=<text shown on payment page>
 &redirect=<url>
+&locale=<locale (e.g. en_US or en)>
 ```
 
 All except `key` are optional. If `amount` is included the user is shown the
 payment page, if not, it is considered an mPOS case and a pre-screen is shown
 for manually setting the amount.
+
+For now only Danish (`da`) and English (default) is supported for the locale,
+please open an issue to request others.
 
 Payment link example: https://pos.paylike.io/?key=ba21f7ac-095c-4941-3196-f6ba24effbaf&currency=DKK&amount=100&reference=order%20232&redirect=http://google.dk
 
