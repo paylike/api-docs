@@ -61,7 +61,7 @@ An API key can be obtained by creating a merchant and adding an app. If your
 app's target audience is third parties, please reach out and we will make your
 app's API key hidden.
 
-**The service is located at `https://api.paylike.io`.**
+**The service is located at `https://midgard.paylike.io`.**
 
 ### Authenticating
 
@@ -114,7 +114,7 @@ A machine with an API key as credentials.
 ### Create an app
 
 ```shell
-curl -i https://api.paylike.io/apps \
+curl -i https://midgard.paylike.io/apps \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -145,7 +145,7 @@ instead of the app's key (which you should always keep secret).
 Get information about the authenticated app, such as the "pk" and "name".
 
 ```shell
-curl -i https://api.paylike.io/me \
+curl -i https://midgard.paylike.io/me \
 	-u :<api-key>
 ```
 
@@ -172,7 +172,7 @@ access to the merchant and to invite and revoke others.
 Make sure to mark accounts as test when implementing.
 
 ```shell
-curl -i https://api.paylike.io/merchants \
+curl -i https://midgard.paylike.io/merchants \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -237,7 +237,7 @@ The created merchant is automatically associated with the creating entity
 ### Update a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk> \
 	-X PUT \
 	-u :<api-key> \
 	-d <data>
@@ -259,7 +259,7 @@ us if you need it changed.
 ### Fetch all merchants
 
 ```shell
-curl -i https://api.paylike.io/identities/<app-pk>/merchants?limit=<num> \
+curl -i https://midgard.paylike.io/identities/<app-pk>/merchants?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -268,7 +268,7 @@ Query parameters: [pagination](#pagination) (required)
 ### Fetch a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk> \
 	-u :<api-key>
 ```
 
@@ -280,7 +280,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/invite \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/invite \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -296,7 +296,7 @@ Expected data:
 #### Revoke user from a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
 	-X DELETE \
 	-u :<api-key>
 ```
@@ -304,7 +304,7 @@ curl -i https://api.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
 #### Fetch all users on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/users?limit=<num> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/users?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -315,7 +315,7 @@ Query parameters: [pagination](#pagination) (required)
 #### Add app to a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/apps \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -331,7 +331,7 @@ Expected data:
 #### Revoke app from a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
 	-X DELETE \
 	-u :<api-key>
 ```
@@ -339,7 +339,7 @@ curl -i https://api.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
 #### Fetch all apps on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/apps?limit=<num> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -353,7 +353,7 @@ payouts and other fincancial transactions are all represented by a line.
 #### Fetch all lines on a merchant
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/lines?limit=<num> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/lines?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -379,7 +379,7 @@ Creating transactions is only used for [recurring payments](#recurring-payments)
 #### From a previous transaction
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -415,7 +415,7 @@ to the extra work involed.
 You will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -448,7 +448,7 @@ Will return:
 The total amount of captures is always less than the transaction's amount.
 
 ```shell
-curl -i https://api.paylike.io/transactions/<transaction-pk>/captures \
+curl -i https://midgard.paylike.io/transactions/<transaction-pk>/captures \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -473,7 +473,7 @@ have at least the right amount of money.
 The total amount of refunds is always less than the total amount captured.
 
 ```shell
-curl -i https://api.paylike.io/transactions/<transaction-pk>/refunds \
+curl -i https://midgard.paylike.io/transactions/<transaction-pk>/refunds \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -492,7 +492,7 @@ Expected input data:
 A complete or partial cancellation of the reserved amount.
 
 ```shell
-curl -i https://api.paylike.io/transactions/<transaction-pk>/voids \
+curl -i https://midgard.paylike.io/transactions/<transaction-pk>/voids \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -508,7 +508,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl -i https://api.paylike.io/merchants/<merchant-pk>/transactions?limit=<num> \
+curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -517,7 +517,7 @@ Query parameters: [pagination](#pagination) (required)
 ### Fetch a transaction
 
 ```shell
-curl https://api.paylike.io/transactions/<transaction-pk> \
+curl https://midgard.paylike.io/transactions/<transaction-pk> \
 	-u :<api-key>
 ```
 
