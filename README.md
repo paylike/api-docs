@@ -61,7 +61,7 @@ An API key can be obtained by creating a merchant and adding an app. If your
 app's target audience is third parties, please reach out and we will make your
 app's API key hidden.
 
-**The service is located at `https://midgard.paylike.io`.**
+**The service is located at `https://api.paylike.io`.**
 
 ### Authenticating
 
@@ -93,15 +93,25 @@ form data as `company[country]`.
 
 All successful calls will return a 2xx status code. 4xx is used for errors in
 your end (validation, constraints, etc.) and 5xx is for server errors (please
-report those).
+report those). Take a look at [how we use status codes](status-codes.md).
 
 Add header `Accept: application/json` (curl: `-H 'Accept: application/json'`)
 for forward compatibility although the service will return JSON at the moment.
 
 ### Pagination
 
-Pagination is achieved using a `limit` and a `skip` parameter (`limit` is
-required where pagination is supported).
+Pagination is achieved using `after`, `before` and `limit` parameters (`limit`
+is required where pagination is supported).
+
+The idea is that you start with `limit` only, then put the last primary key
+(`id`) as `before` in the next request. This way you can have a reliable
+experience even when dealing with lists that are increasing in realtime (such
+as transactions).
+
+All lists are by default sorted with the newest entry first.
+
+Using `after` will automatically reverse the sort order. Use it for retrieving
+newer items.
 
 ### Amounts
 
@@ -114,7 +124,7 @@ A machine with an API key as credentials.
 ### Create an app
 
 ```shell
-curl -i https://midgard.paylike.io/apps \
+curl -i https://api.paylike.io/apps \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -133,7 +143,7 @@ instead of the app's key (which you should always keep secret).
 ```js
 {
 	app: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		name: String,
 		key: String,	// secret key used for authentication
 	}
@@ -142,10 +152,10 @@ instead of the app's key (which you should always keep secret).
 
 ### Fetch current app
 
-Get information about the authenticated app, such as the "pk" and "name".
+Get information about the authenticated app, such as the `id` and `name`.
 
 ```shell
-curl -i https://midgard.paylike.io/me \
+curl -i https://api.paylike.io/me \
 	-u :<api-key>
 ```
 
@@ -154,7 +164,7 @@ Will return:
 ```js
 {
 	identity: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		name: String,	// name of your app, if it has one
 	}
 }
@@ -172,7 +182,7 @@ access to the merchant and to invite and revoke others.
 Make sure to mark accounts as test when implementing.
 
 ```shell
-curl -i https://midgard.paylike.io/merchants \
+curl -i https://api.paylike.io/merchants \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -222,14 +232,14 @@ Will return:
 ```js
 {
 	merchant: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		key: String,	// public key used for transactions and links
 		...,			// more..
 	}
 }
 ```
 
-You probably want to store one or both of "pk" and "key".
+You probably want to store one or both of `id` and `key`.
 
 The created merchant is automatically associated with the creating entity
 (user or app).
@@ -237,7 +247,7 @@ The created merchant is automatically associated with the creating entity
 ### Update a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-id> \
 	-X PUT \
 	-u :<api-key> \
 	-d <data>
@@ -259,7 +269,7 @@ us if you need it changed.
 ### Fetch all merchants
 
 ```shell
-curl -i https://midgard.paylike.io/identities/<app-pk>/merchants?limit=<num> \
+curl -i https://api.paylike.io/identities/<app-id>/merchants?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -268,7 +278,7 @@ Query parameters: [pagination](#pagination) (required)
 ### Fetch a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-id> \
 	-u :<api-key>
 ```
 
@@ -280,7 +290,7 @@ The user will receive an email if they are not signed up at Paylike, or if
 they are not a member of the merchant.
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/invite \
+curl -i https://api.paylike.io/merchants/<merchant-id>/users \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -296,7 +306,7 @@ Expected data:
 #### Revoke user from a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/users/<user-id> \
 	-X DELETE \
 	-u :<api-key>
 ```
@@ -304,7 +314,7 @@ curl -i https://midgard.paylike.io/merchants/<merchant-pk>/users/<user-pk> \
 #### Fetch all users on a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/users?limit=<num> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/users?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -315,7 +325,7 @@ Query parameters: [pagination](#pagination) (required)
 #### Add app to a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps \
+curl -i https://api.paylike.io/merchants/<merchant-id>/apps \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -324,14 +334,14 @@ Expected data:
 
 ```js
 {
-	appPk: String,	// required
+	appId: String,	// required
 }
 ```
 
 #### Revoke app from a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/apps/<app-id> \
 	-X DELETE \
 	-u :<api-key>
 ```
@@ -339,7 +349,7 @@ curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps/<app-pk> \
 #### Fetch all apps on a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/apps?limit=<num> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/apps?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -353,7 +363,7 @@ payouts and other fincancial transactions are all represented by a line.
 #### Fetch all lines on a merchant
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/lines?limit=<num> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/lines?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -364,7 +374,7 @@ Query parameters: [pagination](#pagination) (required)
 An authorization (reservation) of a given amount and subsequent captures,
 refunds and voids.
 
-All transactions have a "trail" property which is a list of actions. You can
+All transactions have a `trail` property which is a list of actions. You can
 check the type of the action by looking at a property of the same name (e.g.
 `transaction.trails[0].capture === true`). Each entry also have an `amount`
 property.
@@ -379,7 +389,7 @@ Creating transactions is only used for [recurring payments](#recurring-payments)
 #### From a previous transaction
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-id>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -388,7 +398,7 @@ Expected input data:
 
 ```js
 {
-	transactionPk: String,	// required
+	transactionId: String,	// required
 	descriptor: String,		// optional, will fallback to merchant descriptor
 	currency: String,		// required, three letter ISO
 	amount: Number,			// required, amount in minor units
@@ -401,7 +411,7 @@ Will return:
 ```js
 {
 	transaction: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		...,			// more..
 	}
 }
@@ -415,7 +425,7 @@ to the extra work involed.
 You will first need to [obtain a card key](#save-a-card).
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions \
+curl -i https://api.paylike.io/merchants/<merchant-id>/transactions \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -424,7 +434,7 @@ Expected input data:
 
 ```js
 {
-	cardPk: String,			// required
+	cardId: String,			// required
 	descriptor: String,		// optional, will fallback to merchant descriptor
 	currency: String,		// required, three letter ISO
 	amount: Number,			// required, amount in minor units
@@ -437,7 +447,7 @@ Will return:
 ```js
 {
 	transaction: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		...,			// more..
 	}
 }
@@ -448,7 +458,7 @@ Will return:
 The total amount of captures is always less than the transaction's amount.
 
 ```shell
-curl -i https://midgard.paylike.io/transactions/<transaction-pk>/captures \
+curl -i https://api.paylike.io/transactions/<transaction-id>/captures \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -473,7 +483,7 @@ have at least the right amount of money.
 The total amount of refunds is always less than the total amount captured.
 
 ```shell
-curl -i https://midgard.paylike.io/transactions/<transaction-pk>/refunds \
+curl -i https://api.paylike.io/transactions/<transaction-id>/refunds \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -492,7 +502,7 @@ Expected input data:
 A complete or partial cancellation of the reserved amount.
 
 ```shell
-curl -i https://midgard.paylike.io/transactions/<transaction-pk>/voids \
+curl -i https://api.paylike.io/transactions/<transaction-id>/voids \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -508,7 +518,7 @@ Expected input data:
 ### Fetch all transactions
 
 ```shell
-curl -i https://midgard.paylike.io/merchants/<merchant-pk>/transactions?limit=<num> \
+curl -i https://api.paylike.io/merchants/<merchant-id>/transactions?limit=<num> \
 	-u :<api-key>
 ```
 
@@ -517,7 +527,7 @@ Query parameters: [pagination](#pagination) (required)
 ### Fetch a transaction
 
 ```shell
-curl https://midgard.paylike.io/transactions/<transaction-pk> \
+curl https://api.paylike.io/transactions/<transaction-id> \
 	-u :<api-key>
 ```
 
@@ -526,7 +536,7 @@ Will return:
 ```js
 {
 	transaction: {
-		pk: String,
+		id: String,
 		amount: Number,
 		pendingAmount: Number,	// available for capture or void
 		capturedAmount: Number,	// captured (available for refund)
@@ -557,7 +567,7 @@ you do not have to do anything further - the card will be in your vault.
 The instructions below are for saving a card from an earlier transaction.
 
 ```shell
-curl -i /merchants/<merchant-pk>/cards \
+curl -i /merchants/<merchant-id>/cards \
 	-u :<api-key> \
 	-d <data>
 ```
@@ -566,7 +576,7 @@ Expected input data:
 
 ```js
 {
-	transactionPk: String,	// required
+	transactionId: String,	// required
 	notes: String,			// optional
 }
 ```
@@ -576,7 +586,7 @@ Will return:
 ```js
 {
 	card: {
-		pk: String,		// unique key for referencing
+		id: String,		// unique key for referencing
 		...,			// more..
 	}
 }
