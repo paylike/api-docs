@@ -12,8 +12,8 @@ deprecation notices, API changes and new features**, or you can watch this
 repository for changes.
 
 Backwards incompatible changes including migration paths will be announced on
-the mailing list and here 6 months in advance. This way you will always have
-at least half a year to update your system.
+the mailing list and here 6 months in advance providing you plenty of time to
+update.
 
 - Basics
 	- [Getting an API key](#getting-an-api-key)
