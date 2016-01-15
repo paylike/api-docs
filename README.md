@@ -125,7 +125,6 @@ A machine with an API key as credentials.
 
 ```shell
 curl -i https://api.paylike.io/apps \
-	-u :<api-key> \
 	-d <data>
 ```
 
