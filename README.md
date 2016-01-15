@@ -139,6 +139,8 @@ Expected input data:
 Supply a name if you are developing a third party app. It will then be shown
 instead of the app's key (which you should always keep secret).
 
+Will return:
+
 ```js
 {
 	app: {
