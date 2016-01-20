@@ -88,8 +88,10 @@ curl <url> \
 	-d key2="val2"
 ```
 
-Nested properties like `company.country` of a merchant can be provided using
-form data as `company[country]`.
+When using `application/x-www-form-urlencoded` nested properties like
+`company.country` of a merchant can be provided using form data as
+`company[country]` and booleans should be either "yes" or "no" (e.g. `curl
+[..] -d test=no`).
 
 ### Response
 
