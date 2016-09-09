@@ -3,6 +3,7 @@
 Clients:
 
 - Node.js: https://github.com/paylike/node-api (official)
+- .NET: https://github.com/paylike/Paylike.NET (maintained by [@andronachev](https://github.com/andronachev))
 
 Building a client in [insert your favourite language here]? Reach out
 (hello@paylike.io), we might consider sponsoring the maintenance.
