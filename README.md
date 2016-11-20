@@ -643,7 +643,7 @@ An example flow could look like this:
 You do not need to do clever stuff about expiration if you follow this flow -
 cards will fail for whatever reason and be replaced by the customer.
 
-You could enhance the flow by creating rrecurring payments a bit earlier to
+You could enhance the flow by creating recurring payments a bit earlier to
 warn the user if an upcoming payment will fail and needs to be completed
 manually. Delay the capture for the actual renewal date.
 
