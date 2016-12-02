@@ -61,7 +61,7 @@ that transaction using only the API.
 
 3. Invite your email to the account (optional)
 
-	Still using your app for authentication and you new account's id, you can
+	Still using your app for authentication and you new account's ID, you can
 	now invite your email to get access via https://app.paylike.io
 
 	```shell

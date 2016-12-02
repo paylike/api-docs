@@ -62,9 +62,9 @@ update.
 
 ### Getting an API key
 
-An API key can be obtained by creating a merchant and adding an app. If your
-app's target audience is third parties, please reach out and we will make your
-app's API key hidden.
+An API key (secret) can be obtained by creating a merchant and adding an app.
+If your app's target audience is third parties, please reach out and we will
+make your app's API key hidden.
 
 **The service is located at `https://api.paylike.io`.**
 
@@ -172,7 +172,7 @@ Will return:
 ```js
 {
 	identity: {
-		id: String,		// unique key for referencing
+		id: String,		// unique ID for referencing
 		name: String,	// name of your app, if it has one
 	}
 }
@@ -240,7 +240,7 @@ Will return:
 ```js
 {
 	merchant: {
-		id: String,		// unique key for referencing
+		id: String,		// unique ID for referencing
 		key: String,	// public key used for transactions and links
 		...,			// more..
 	}
@@ -419,7 +419,7 @@ Will return:
 ```js
 {
 	transaction: {
-		id: String,		// unique key for referencing
+		id: String,		// unique ID for referencing
 		...,			// more..
 	}
 }
@@ -430,7 +430,7 @@ Will return:
 Using a previous transaction is, in most cases, superior to saving a card due
 to the extra work involed.
 
-You will first need to [obtain a card key](#save-a-card).
+You will first need to [obtain a card ID](#save-a-card).
 
 ```shell
 curl -i https://api.paylike.io/merchants/<merchant-id>/transactions \
@@ -455,7 +455,7 @@ Will return:
 ```js
 {
 	transaction: {
-		id: String,		// unique key for referencing
+		id: String,		// unique ID for referencing
 		...,			// more..
 	}
 }
@@ -594,13 +594,13 @@ Will return:
 ```js
 {
 	card: {
-		id: String,		// unique key for referencing
+		id: String,		// unique ID for referencing
 		...,			// more..
 	}
 }
 ```
 
-Once you have a card key, you will be able to [create new transactions](#create-a-transaction).
+Once you have a card ID, you will be able to [create new transactions](#create-a-transaction).
 
 ### Fetch a card
 
@@ -659,10 +659,10 @@ An example flow could look like this:
 
 5. (server/async) Recurring payment
 
-	[Create a transaction](#create-a-transaction) based on the previous transaction key
-	saved in 3. and capture it, if it fails for whatever reason (expired,
-	not supported, insufficient funds, etc.), notify the customer by email or
-	other means and restart the process from 1.
+	[Create a transaction](#create-a-transaction) based on the previous
+	transaction ID saved in 3. and capture it, if it fails for whatever reason
+	(expired, not supported, insufficient funds, etc.), notify the customer by
+	email or other means and restart the process from 1.
 
 You do not need to do clever stuff about expiration if you follow this flow -
 cards will fail for whatever reason and be replaced by the customer.
