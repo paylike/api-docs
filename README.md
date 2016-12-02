@@ -565,8 +565,6 @@ Will return:
 
 ## Cards
 
-A card is.. a credit card.
-
 ### Save a card
 
 When using our [frontend SDK](https://github.com/paylike/sdk) for saving cards
