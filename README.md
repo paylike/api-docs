@@ -56,6 +56,7 @@ update.
 	- [Fetch a transaction](#fetch-a-transaction)
 - [Cards](#cards)
 	- [Save a card](#save-a-card)
+	- [Fetch a card](#fetch-a-card)
 - [Recurring payments](#recurring-payments)
 - [Generate payment link](#generate-payment-link)
 
@@ -600,6 +601,29 @@ Will return:
 ```
 
 Once you have a card key, you will be able to [create new transactions](#create-a-transaction).
+
+### Fetch a card
+
+```shell
+curl https://api.paylike.io/cards/<card-id> \
+	-u :<api-key>
+```
+
+Will return:
+
+```js
+{
+	card: {
+		id: String,
+		merchantId: String,
+		created: Date,
+		bin: String,	// first 6 numbers in PAN (card number)
+		last4: String,
+		expiry: Date,
+		scheme: String, // "visa" or "mastercard"
+	}
+}
+```
 
 ## Recurring payments
 
