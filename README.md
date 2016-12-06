@@ -631,19 +631,21 @@ Things you should be aware of:
 - cards expire
 - a card could be reported stolen between payments
 - the card may not have sufficient funds
-- a host of things will go wrong
+- banks might decline for no apparent reason
 
-Your flow should gracely handle these failures and allow affected users to pay
-with another card.
+Your flow should gracely handle failures and allow users to pay with another
+card and as a regular transaction.
 
-This is the reason you should avoid using the "save card" part of our frontend
-SDK for anything else than updating the card of an existing customer - the
-transaction is **more likely to be successful with a regular payment**.
+Due to some banks not accepting recurring payments (CVC-less) a transaction is
+**more likely to be successful with a regular payment** thus you should favor
+regular transactions and use our "new transaction from existing" as an
+optimization - don't save card details upfront if you can avoid it, that's
+also good conversion karma.
 
-Instead present the user with the initial payment and ask your user whether
-they want to subscribe to future payments. On the next payment you simply try
-creating a transaction - if it fails, ask the user to do the payment manually
-and restart the process.
+Present the user with the initial payment (regular transaction with CVC) and
+ask your user whether they want to subscribe to future payments. On the next
+payment you simply try creating a transaction - if it fails, ask the user to
+do the payment manually (with CVC) and restart the process.
 
 An example flow could look like this:
 
@@ -668,6 +670,11 @@ cards will fail for whatever reason and be replaced by the customer.
 You could enhance the flow by creating recurring payments a bit earlier to
 warn the user if an upcoming payment will fail and needs to be completed
 manually. Delay the capture for the actual renewal date.
+
+If you are using 3D-Secure you should be aware that the protocol only supports
+a transaction and not saving a card thus you cannot use 3D-Secure for
+recurring payments, but you will have a much stronger case if the first
+transaction is a regular 3D-Secure protected one.
 
 ## Generate payment link
 
