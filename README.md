@@ -633,25 +633,25 @@ Will return:
 
 Things you should be aware of:
 
-- recurring payments are not supported by all card issuing banks
 - cards expire
 - a card could be reported stolen between payments
 - the card may not have sufficient funds
-- banks might decline for no apparent reason
+- banks might temporarily decline cards
+- recurring payments may require the user to manually enable it at their bank
 
 Your flow should gracely handle failures and allow users to pay with another
 card and as a regular transaction.
 
-Due to some banks not accepting recurring payments (CVC-less) a transaction is
-**more likely to be successful with a regular payment** thus you should favor
-regular transactions and use our "new transaction from existing" as an
-optimization - don't save card details upfront if you can avoid it, that's
-also good conversion karma.
+Due to some banks not accepting recurring payments (CVC-less) by default a
+transaction is **more likely to be successful with a regular payment** thus
+you should favor regular transactions and use our "new transaction from
+existing" as an optimization - don't save card details upfront if you can
+avoid it, that's also good conversion karma.
 
 Present the user with the initial payment (regular transaction with CVC) and
 ask your user whether they want to subscribe to future payments. On the next
-payment you simply try creating a transaction - if it fails, ask the user to
-do the payment manually (with CVC) and restart the process.
+payment try creating a transaction - if it fails, ask the user to do the
+payment manually (with CVC) and restart the process.
 
 An example flow could look like this:
 
