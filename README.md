@@ -461,6 +461,12 @@ Will return:
 }
 ```
 
+#### Error handling
+
+In case of a processing error, like insufficient funds, you will see a status
+code `400` and the response body will contain one of
+[the processing errors](https://github.com/paylike/processing-errors).
+
 #### Capture a transaction
 
 The total amount of captures is always less than the transaction's amount.
