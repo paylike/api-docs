@@ -551,20 +551,67 @@ Will return:
 {
 	transaction: {
 		id: String,
-		amount: Number,
-		pendingAmount: Number,	// available for capture or void
-		capturedAmount: Number,	// captured (available for refund)
-		refundedAmount: Number,	// refunded (no further action possible)
-		voidedAmount: Number,	// voided (no further action possible)
+		merchantId: String,		// ID of the owning merchant account
+		test: Boolean,			// whether on a test merchant account
+		created: Date,			// Date of transaction
+
+		currency: String,		// currency ISO code
+		amount: Number,			// amount in minor units
+		descriptor: String,		// text on bank statement
+
+		pendingAmount: Number,	// amount available for capture or void
+		capturedAmount: Number,	// amount captured (available for refund)
+		refundedAmount: Number,	// amount refunded (no further action possible)
+		voidedAmount: Number,	// amount voided (no further action possible)
+		disputedAmount: Number,	// amount involed in disputes such as chargebacks
+
 		card: {
-			bin: String,	// first 6 numbers in PAN (card number)
+			bin: String,		// first 6 numbers in PAN (card number)
 			last4: String,
 			expiry: Date,
-			scheme: String, // "visa" or "mastercard"
+			scheme: String,		// "visa" or "mastercard"
 		},
-		currency: "USD",
-		custom: Object,		// custom data
-		trail: Array,		// list of all captures, voids and refunds
+
+		custom: Object,			// custom data
+
+		tds: String,			// one of "attempt" or "full" if 3-D Secure was applied
+		recurring: Boolean,		// whether the transaction was made from the server
+		successful: Boolean,
+		error: false|Object,	// contains a processing error if unsuccessful
+
+		// list of all captures, voids, refunds and disputes
+		trail: [
+			{
+				// only one of the following will be present
+				capture: Boolean,
+				refund: Boolean,
+				void: Boolean,
+				dispute: {
+					id: String,
+
+					// only one of the following will be present
+					won: Boolean,
+					lost: Boolean,
+				},
+
+				created: Date,
+
+				amount: Number,		// amount in minor units and transaction currency
+
+				/*
+				Amount in the merchant account's currency in minor units that
+				the merchant account balance was affected with which in
+				practice means the actual profit from the transaction after
+				fees and/or currency conversion.
+				*/
+				balance: Number,
+
+				fee: Object,		// detailed description of fees applied
+				descriptor: String,	// text on bank statement
+
+				lineId: String,		// ID of the related accounting line
+			},
+		],
 	}
 }
 ```
