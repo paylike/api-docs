@@ -421,7 +421,6 @@ Will return:
 {
 	transaction: {
 		id: String,		// unique ID for referencing
-		...,			// more..
 	}
 }
 ```
@@ -457,7 +456,6 @@ Will return:
 {
 	transaction: {
 		id: String,		// unique ID for referencing
-		...,			// more..
 	}
 }
 ```
@@ -647,7 +645,6 @@ Will return:
 {
 	card: {
 		id: String,		// unique ID for referencing
-		...,			// more..
 	}
 }
 ```
