@@ -50,9 +50,13 @@ update.
 		- [Fetch all lines on a merchant](#fetch-all-lines-on-a-merchant)
 - [Transactions](#transactions)
 	- [Create a transaction](#create-a-transaction)
-		- [Capture a transaction](#capture-a-transaction)
-		- [Refund a transaction](#refund-a-transaction)
-		- [Void a transaction](#void-a-transaction)
+		- [From a web client (e.g. a webshop)](#from-a-web-client-eg-a-webshop)
+		- [From iOS, Android, another custom client or your server](#from-ios-android-another-custom-client-or-your-server)
+		- [Using a previous transaction](#using-a-previous-transaction)
+		- [Using a saved (tokenized) card](#using-a-saved-tokenized-card)
+	- [Capture a transaction](#capture-a-transaction)
+	- [Refund a transaction](#refund-a-transaction)
+	- [Void a transaction](#void-a-transaction)
 	- [Fetch all transactions](#fetch-all-transactions)
 	- [Fetch a transaction](#fetch-a-transaction)
 - [Cards](#cards)
@@ -390,12 +394,18 @@ property.
 
 ### Create a transaction
 
-When using [payment links](#generate-payment-link) or our [Web SDK](https://github.com/paylike/sdk)
-you do not need to create any transactions.
+#### From a web client (e.g. a webshop)
 
-Creating transactions is only used for [recurring payments](#recurring-payments).
+Please see our [Web SDK](https://github.com/paylike/sdk) or [payment links
+](#generate-payment-link).
 
-#### From a previous transaction
+#### From iOS, Android, another custom client or your server
+
+Please see the [gateway API reference](gateway.md).
+
+#### Using a previous transaction
+
+Make sure to read about [recurring payments](#recurring-payments).
 
 ```shell
 curl -i https://api.paylike.io/merchants/<merchant-id>/transactions \
@@ -425,7 +435,9 @@ Will return:
 }
 ```
 
-#### From a saved card
+#### Using a saved (tokenized) card
+
+Make sure to read about [recurring payments](#recurring-payments).
 
 Using a previous transaction is, in most cases, superior to saving a card due
 to the extra work involed.
@@ -466,7 +478,7 @@ In case of a processing error, like insufficient funds, you will see a status
 code `400` and the response body will contain one of
 [the processing errors](https://github.com/paylike/processing-errors).
 
-#### Capture a transaction
+### Capture a transaction
 
 The total amount of captures is always less than the transaction's amount.
 
@@ -491,7 +503,7 @@ The attribute is provied to make sure a user did not tamper with the currency
 during authorization. This way, if the capture succeeds, you are guaranteed to
 have at least the right amount of money.
 
-#### Refund a transaction
+### Refund a transaction
 
 The total amount of refunds is always less than the total amount captured.
 
@@ -510,7 +522,7 @@ Expected input data:
 }
 ```
 
-#### Void a transaction
+### Void a transaction
 
 A complete or partial cancellation of the reserved amount.
 
@@ -619,8 +631,11 @@ Will return:
 
 ### Save a card
 
-When using our [Web SDK](https://github.com/paylike/sdk) for saving cards
-you do not have to do anything further - the card will be in your vault.
+When using our [Web SDK](https://github.com/paylike/sdk) for saving cards you
+do not have to do anything further - the card will be in your vault.
+
+Alternatively, for iOS, Android and other custom implementations, see the
+[gateway API reference](gateway.md).
 
 The instructions below are for saving a card from an earlier transaction.
 
