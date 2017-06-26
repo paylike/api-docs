@@ -390,7 +390,7 @@ property.
 
 ### Create a transaction
 
-When using [payment links](#generate-payment-link) or our [frontend SDK](https://github.com/paylike/sdk)
+When using [payment links](#generate-payment-link) or our [Web SDK](https://github.com/paylike/sdk)
 you do not need to create any transactions.
 
 Creating transactions is only used for [recurring payments](#recurring-payments).
@@ -619,7 +619,7 @@ Will return:
 
 ### Save a card
 
-When using our [frontend SDK](https://github.com/paylike/sdk) for saving cards
+When using our [Web SDK](https://github.com/paylike/sdk) for saving cards
 you do not have to do anything further - the card will be in your vault.
 
 The instructions below are for saving a card from an earlier transaction.
