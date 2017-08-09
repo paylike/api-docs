@@ -14,7 +14,9 @@ Building a client in [insert your favourite language here]? Reach out
 deprecation notices, API changes and new features**, or you can watch this
 repository for changes.
 
-Check out our [getting started guide](getting-started.md).
+See also:
+- [Getting started, a primer on the Paylike API](getting-started.md).
+- [Money in programming (how to deal with)](money.md).
 
 Backwards incompatible changes including migration paths will be announced on
 the mailing list and here 6 months in advance providing you plenty of time to
