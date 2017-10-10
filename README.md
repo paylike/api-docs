@@ -717,7 +717,7 @@ payment manually (with CVC) and restart the process.
 
 An example flow could look like this:
 
-1. (client) A payment popup is shown or a payment link is generated
+1. (client) A [payment popup](https://github.com/paylike/sdk#popup-for-a-transaction) is shown or a [payment link](https://github.com/paylike/api-docs#generate-payment-link) is generated
 2. (client) The user is asked whether to save their card for future payments
 3. (server) Save transaction
 4. (server/async) Capture the transaction
