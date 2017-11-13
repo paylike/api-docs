@@ -14,10 +14,11 @@ that transaction using only the API.
 
 	```json
 	{
-	"app": {
-		"id": "56983e109967856f4ea4aa71",
-		"name": "My new app",
-		"key": "416766b7-6d64-446c-a918-6df8e6e7cbf4"
+		"app": {
+			"id": "56983e109967856f4ea4aa71",
+			"name": "My new app",
+			"key": "416766b7-6d64-446c-a918-6df8e6e7cbf4"
+		}
 	}
 	```
 
