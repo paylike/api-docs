@@ -64,6 +64,9 @@ update.
 - [Cards](#cards)
 	- [Save a card](#save-a-card)
 	- [Fetch a card](#fetch-a-card)
+- [Fraud alerts](#fraud-alerts)
+	- [Search fraud alerts](#search-fraud-alerts)
+	- [Fetch a fraud alert](#fetch-a-fraud-alert)
 - [Recurring payments](#recurring-payments)
 - [Generate payment link](#generate-payment-link)
 
@@ -687,6 +690,43 @@ Will return:
 		last4: String,
 		expiry: Date,
 		scheme: String, // "visa" or "mastercard"
+	}
+}
+```
+
+## Fraud alerts
+
+### Search fraud alerts
+
+```shell
+curl -i https://api.paylike.io/frauds \
+	-u :<api-key>
+```
+
+Query parameters:
+
+- [pagination](#pagination) (required)
+- `filter[merchantId]` (required)
+- `filter[transactionId]` (optional)
+
+### Fetch a fraud alert
+
+```shell
+curl https://api.paylike.io/frauds/<fraud-id> \
+	-u :<api-key>
+```
+
+Will return:
+
+```js
+{
+	fraud: {
+		id: String,
+		merchantId: String,
+		transactionId: String,
+		created: Date,
+		reported: Date|undefined,
+		reason: Number|undefined,
 	}
 }
 ```
