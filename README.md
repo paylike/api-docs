@@ -730,6 +730,18 @@ Will return:
 	}
 }
 ```
+Reason can be any of:
+
+| Reason                 | Code |
+|------------------------|------|
+| Misc                   | 0    |
+| Fraudulent usage       | 1    |
+| Fraudulent application | 2    |
+| Counterfeit            | 3    |
+| Account takeover       | 4    |
+| Card not delivered     | 5    |
+| Card stolen            | 6    |
+| Card lost              | 7    |
 
 ## Recurring payments
 
