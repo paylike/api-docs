@@ -485,7 +485,8 @@ code `400` and the response body will contain one of
 
 ### Capture a transaction
 
-The total amount of captures is always less than the transaction's amount.
+The total amount of captures is always less than or equal to the transaction's
+amount.
 
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-id>/captures \
@@ -510,7 +511,8 @@ have at least the right amount of money.
 
 ### Refund a transaction
 
-The total amount of refunds is always less than the total amount captured.
+The total amount of refunds is always less than or equal to the total amount
+captured.
 
 ```shell
 curl -i https://api.paylike.io/transactions/<transaction-id>/refunds \
