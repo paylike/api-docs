@@ -183,7 +183,8 @@ Will return:
 {
 	identity: {
 		id: String,		// unique ID for referencing
-		name: String,	// name of your app, if it has one
+		name: String,		// name of your app, if it has one
+		created: String, 	// creation date of your app
 	}
 }
 ```
