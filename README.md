@@ -64,6 +64,9 @@ update.
 - [Cards](#cards)
 	- [Save a card](#save-a-card)
 	- [Fetch a card](#fetch-a-card)
+- [Disputes](#disputes)
+	- [Fetch all disputes](#fetch-all-disputes)
+	- [Fetch a dispute](#fetch-a-dispute)
 - [Fraud alerts](#fraud-alerts)
 	- [Search fraud alerts](#search-fraud-alerts)
 	- [Fetch a fraud alert](#fetch-a-fraud-alert)
@@ -693,6 +696,47 @@ Will return:
 		last4: String,
 		expiry: Date,
 		scheme: String, // "visa" or "mastercard"
+	}
+}
+```
+
+## Disputes
+
+### Fetch all disputes
+
+```shell
+curl -i https://api.paylike.io/disputes \
+	-u :<api-key>
+```
+
+Query parameters:
+
+- [pagination](#pagination) (required)
+- `filter[merchantId]` (required)
+- `filter[transactionId]` (optional)
+
+### Fetch a dispute
+
+```shell
+curl https://api.paylike.io/disputes/<dispute-id> \
+	-u :<api-key>
+```
+
+Will return:
+
+```js
+{
+	dispute: {
+		id: String,
+		merchantId: String,			// ID of the owning merchant account
+		transactionId: String,	// Related transaction
+		created: Date,
+		amount: Number,
+		reason: {
+			code: Number,
+			title: String,
+		},
+		due: Date,
 	}
 }
 ```
