@@ -19,7 +19,7 @@ $ curl 'https://gateway.paylike.io/transactions' \
 	-d "amount=2000" \
 	-d "card[number]=4100000000000000" \
 	-d "card[expiry][month]=08" \
-	-d "card[expiry][year]=2018" \
+	-d "card[expiry][year]=2020" \
 	-d "card[code]=123"
 ```
 
@@ -56,7 +56,7 @@ $ curl 'https://gateway.paylike.io/cards' \
 	-d "key=<public-key>" \
 	-d "number=4100000000000000" \
 	-d "expiry[month]=08" \
-	-d "expiry[year]=2018" \
+	-d "expiry[year]=2020" \
 	-d "code=123"
 ```
 
