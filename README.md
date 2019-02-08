@@ -5,7 +5,7 @@ Clients:
 - Node.js: https://github.com/paylike/node-api (official)
 - .NET: https://github.com/paylike/Paylike.NET (maintained by [@andronachev](https://github.com/andronachev))
 - PHP: https://github.com/paylike/php-api (maintained by [@ionutcalara](https://github.com/ionutcalara))
-- Python: https://github.com/hungrydk/paylike-python-sdk (maintained by [@SuneKjaergaard](https://github.com/SuneKjaergaard))
+- Python: https://pypi.org/project/paylike/ (maintained by [@SuneKjaergaard](https://github.com/SuneKjaergaard))
 - Java: https://github.com/paylike/java-api (maintained by [@jankjr](https://github.com/jankjr))
 
 Building a client in [insert your favourite language here]? Reach out
