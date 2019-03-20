@@ -7,6 +7,7 @@ Clients:
 - PHP: https://github.com/paylike/php-api (maintained by [@ionutcalara](https://github.com/ionutcalara))
 - Python: https://pypi.org/project/paylike/ (maintained by [@SuneKjaergaard](https://github.com/SuneKjaergaard))
 - Java: https://github.com/paylike/java-api (maintained by [@jankjr](https://github.com/jankjr))
+- Go: https://github.com/paylike/go-api (maintained by [@Roverr](https://github.com/Roverr))
 
 Building a client in [insert your favourite language here]? Reach out
 (hello@paylike.io), we might consider sponsoring the maintenance.
