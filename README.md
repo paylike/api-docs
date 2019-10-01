@@ -452,7 +452,7 @@ Will return:
 Make sure to read about [recurring payments](#recurring-payments).
 
 Using a previous transaction is, in most cases, superior to saving a card due
-to the extra work involed.
+to the extra work involved.
 
 You will first need to [obtain a card ID](#save-a-card).
 
