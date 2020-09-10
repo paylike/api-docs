@@ -394,6 +394,23 @@ curl -i https://api.paylike.io/merchants/<merchant-id>/lines?limit=<num> \
 
 Query parameters: [pagination](#pagination) (required)
 
+Will return a list of:
+
+```js
+{
+	id: String,
+	merchantId: String,	// ID of the owning merchant account
+	test: Boolean,			// whether on a test merchant account
+	created: Date,			// Date of transaction
+	balance: Number,		// value in minor units (final on account balance)
+	fee: Number,				// fee, if any, in minor units
+	description: String	// optional reference text
+}
+```
+
+Additional fields may be available on a line such as a `transactionId` for
+captures, refunds, etc..
+
 ## Transactions
 
 An authorization (reservation) of a given amount and subsequent captures,
