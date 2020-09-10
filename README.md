@@ -402,7 +402,7 @@ Will return a list of:
 	merchantId: String,	// ID of the owning merchant account
 	test: Boolean,			// whether on a test merchant account
 	created: Date,			// Date of transaction
-	balance: Number,		// value in minor units (final on account balance)
+	balance: Number,		// value in minor units (final impact on account balance)
 	fee: Number,				// fee, if any, in minor units
 	description: String	// optional reference text
 }
