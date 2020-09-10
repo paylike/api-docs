@@ -53,6 +53,8 @@ update.
 		- [Fetch all apps on a merchant](#fetch-all-apps-on-a-merchant)
 	- [Lines](#merchants-lines)
 		- [Fetch all lines on a merchant](#fetch-all-lines-on-a-merchant)
+- [Lines](#lines)
+	- [Fetch a line](#fetch-a-line)
 - [Transactions](#transactions)
 	- [Create a transaction](#create-a-transaction)
 		- [From a web client (e.g. a webshop)](#from-a-web-client-eg-a-webshop)
@@ -394,7 +396,21 @@ curl -i https://api.paylike.io/merchants/<merchant-id>/lines?limit=<num> \
 
 Query parameters: [pagination](#pagination) (required)
 
-Will return a list of:
+## Lines
+
+An entry on the financial balance of a merchant account.
+
+All lines have a `balance` property detailing the final impact on the
+financial balance in minor units of the merchant account's currency.
+
+### Fetch a line
+
+```shell
+curl https://api.paylike.io/lines/<line-id> \
+	-u :<api-key>
+```
+
+Will return:
 
 ```js
 {
