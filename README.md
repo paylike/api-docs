@@ -825,6 +825,7 @@ Reason can be any of:
 | Card not delivered     | 5    |
 | Card stolen            | 6    |
 | Card lost              | 7    |
+| Cardholder manipulated | 8    |
 
 ## Recurring payments
 
