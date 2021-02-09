@@ -7,7 +7,7 @@ that transaction using only the API.
 
 	```shell
 	curl -i https://api.paylike.io/apps \
-		-d name="My new app"
+		-d name="Pizzkebabhouse"
 	```
 
 	Should return something like:
@@ -15,9 +15,9 @@ that transaction using only the API.
 	```json
 	{
 		"app": {
-			"id": "56983e109967856f4ea4aa71",
-			"name": "My new app",
-			"key": "416766b7-6d64-446c-a918-6df8e6e7cbf4"
+			"id": "6017ff785b1f7e3d1ec02139",
+			"name": "Pizzakebabhouse",
+			"key": "93424265-0617-484d-8486-bc7c69b50272"
 		}
 	}
 	```
@@ -30,14 +30,14 @@ that transaction using only the API.
 
 	```shell
 	curl -i https://api.paylike.io/merchants \
-		-u :416766b7-6d64-446c-a918-6df8e6e7cbf4 \
+		-u :93424265-0617-484d-8486-bc7c69b50272 \
 		-d test="yes" \
-		-d name="My webshop" \
-		-d email="my-contact-email@example.com" \
-		-d currency="USD" \
-		-d website="https://example.com" \
-		-d descriptor="My webshop" \
-		-d company[country]="DK"
+		-d name="My Pizzakebabhouse" \
+		-d email="my-contact-pizzakebabhouse@outlook.com" \
+		-d currency="NOK" \
+		-d website="https://Pizzakebabhouse.no" \
+		-d descriptor="My pizzakebabhouse" \
+		-d company[country]="Norge"
 	```
 
 	Should return something along the lines of:
@@ -45,8 +45,8 @@ that transaction using only the API.
 	```json
 	{
 		"merchant": {
-			"id": "569843df9967856f4ea4aa77",
-			"key": "f4f516ab-f253-4f76-a924-67b6486d42e4",
+			"id": "6017ff785b1f7e3d1ec02139",
+			"key": "93424265-0617-484d-8486-bc7c69b50272",
 			...
 		}
 	}
@@ -66,9 +66,9 @@ that transaction using only the API.
 	now invite your email to get access via https://app.paylike.io
 
 	```shell
-	curl -i https://api.paylike.io/merchants/569843df9967856f4ea4aa77/users \
-		-u :416766b7-6d64-446c-a918-6df8e6e7cbf4 \
-		-d email="my-email@example.com"
+	curl -i https://api.paylike.io/merchants/6017ff785b1f7e3d1ec02139/users \
+		-u :93424265-0617-484d-8486-bc7c69b50272 \
+		-d email="my-pizzakebabhouse@outlook.com"
 	```
 
 4. Fetch all transactions
@@ -89,8 +89,8 @@ that transaction using only the API.
 	Finally, let's capture the transaction in its whole:
 
 	```shell
-	curl -i https://api.paylike.io/transactions/569843df9967856f4ea4bb59/captures \
-		-u :416766b7-6d64-446c-a918-6df8e6e7cbf4
+	curl -i https://api.paylike.io/transactions/6017ff785b1f7e3d1ec02139/captures \
+		-u :93424265-0617-484d-8486-bc7c69b50272
 		-d amount=100
 	```
 
