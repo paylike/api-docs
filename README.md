@@ -894,6 +894,7 @@ https://pos.paylike.io/
 &text=<text shown on payment page>
 &redirect=<url>
 &locale=<locale (e.g. en_US or en)>
+&recurring=y
 ```
 
 All except `key` are optional. If `amount` is included the user is shown the
