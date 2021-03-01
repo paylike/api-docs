@@ -853,32 +853,33 @@ payment manually (with CVC) and restart the process.
 
 An example flow could look like this:
 
-1. (client) A [payment popup](https://github.com/paylike/sdk#popup-for-a-transaction) is shown or a [payment link](https://github.com/paylike/api-docs#generate-payment-link) is generated
-2. (client) The user is asked whether to save their card for future payments
-3. (server) Save transaction
+1. (client) The user accepts to have their card saved for future payments
+   either explicitly or by signing up for a subscription
+2. (client) A [payment
+   popup](https://github.com/paylike/sdk#popup-for-a-transaction) is shown or
+   a [payment link](https://github.com/paylike/api-docs#generate-payment-link)
+   is generated
+3. (server) Save transaction ID
 4. (server/async) Capture the transaction
 
 	This step should be completed only when your services or your goods are
-	dispatched to the customer.
+	dispatched to the customer (immediately for most subscriptions).
 
-5. (server/async) Recurring payment
+5. (server/async, e.g. one month later) Create recurring payment and capture
+   payment
 
-	[Create a transaction](#create-a-transaction) based on the previous
-	transaction ID saved in 3. and capture it, if it fails for whatever reason
+	[Create a transaction](#using-a-previous-transaction) based on the previous
+	transaction ID saved in (3) and capture it, if it fails for whatever reason
 	(expired, not supported, insufficient funds, etc.), notify the customer by
-	email or other means and restart the process from 1.
+	email or other means and restart the process from (1)
 
-You do not need to do clever stuff about expiration if you follow this flow -
-cards will fail for whatever reason and be replaced by the customer.
+You do not need to keep track of card expiration, or special-case any
+rejections if you follow this flow - cards will fail for whatever reason and
+be replaced by the customer.
 
 You could enhance the flow by creating recurring payments a bit earlier to
 warn the user if an upcoming payment will fail and needs to be completed
 manually. Delay the capture for the actual renewal date.
-
-If you are using 3D-Secure you should be aware that the protocol only supports
-a transaction and not saving a card thus you cannot use 3D-Secure for
-recurring payments, but you will have a much stronger case if the first
-transaction is a regular 3D-Secure protected one.
 
 ## Generate payment link
 
