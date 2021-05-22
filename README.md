@@ -441,8 +441,8 @@ property.
 
 #### From a web client (e.g. a webshop)
 
-Please see our [Web SDK](https://github.com/paylike/sdk) or [payment links
-](#generate-payment-link).
+Please see our [Web SDK](https://github.com/paylike/sdk) or
+[payment links](#generate-payment-link).
 
 #### From iOS, Android, another custom client or your server
 
