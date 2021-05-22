@@ -13,7 +13,7 @@ Clients:
 Building a client in [insert your favourite language here]? Reach out
 (hello@paylike.io), we might consider sponsoring the maintenance.
 
-**Make sure to [subscribe to our mailling list](http://eepurl.com/bCGmg1) for
+**Make sure to [subscribe to our mailing list](http://eepurl.com/bCGmg1) for
 deprecation notices, API changes and new features**, or you can watch this
 repository for changes.
 
