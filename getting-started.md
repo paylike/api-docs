@@ -57,7 +57,7 @@ that transaction using only the API.
 	The `key` attribute is the public key used for creating new transactions.
 
 	Follow the examples at https://github.com/paylike/sdk to set up the
-	frontend for payments and create a test sale using the card number `4100
+	frontend for payments and create a test sale using the card number `1000
 	0000 0000 0000`.
 
 3. Invite your email to the account (optional)
