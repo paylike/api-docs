@@ -446,7 +446,8 @@ Please see our [Web SDK](https://github.com/paylike/sdk) or
 
 #### From iOS, Android, another custom client or your server
 
-Please see the [gateway API reference](gateway.md).
+Please see the "payments" section of the
+[API reference](https://github.com/paylike/api-reference).
 
 #### Using a previous transaction
 
@@ -462,7 +463,7 @@ Expected input data:
 
 ```js
 {
-	transactionId: String,	// required
+	transactionId: String,	// required, may also be called "authorizationId"
 	descriptor: String,		// optional, will fallback to merchant descriptor
 	currency: String,		// required, three letter ISO
 	amount: Number,			// required, amount in minor units
@@ -680,9 +681,6 @@ Will return:
 
 When using our [Web SDK](https://github.com/paylike/sdk) for saving cards you
 do not have to do anything further - the card will be in your vault.
-
-Alternatively, for iOS, Android and other custom implementations, see the
-[gateway API reference](gateway.md).
 
 The instructions below are for saving a card from an earlier transaction.
 

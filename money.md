@@ -7,8 +7,8 @@ Monetary values are problematic for (at least) three reasons:
 (internationalization)](#i18n). Follow [these best practices](#best-practices)
 to get a head start.
 
-That is also why all monetary values in Paylike are both inputted and
-outputted as minor units.
+All monetary values in Paylike are both inputted and outputted as minor units
+unless an explicit "exponent" is provided.
 
 ## Floats
 
