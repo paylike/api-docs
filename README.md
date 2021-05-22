@@ -892,22 +892,27 @@ For mPOS and payment links the format of the link should conform to:
 ```
 https://pos.paylike.io/
 ?key=<public key>
+&test=1
 &currency=<three letter ISO>
-&amount=<amount in minor>
+&value=<amount in major e.g. 10.99>
 &reference=<text shown in dashboard>
 &text=<text shown on payment page>
 &redirect=<url>
-&locale=<locale (e.g. en_US or en)>
+&locale=<locale (e.g. "en_US" or just "en")>
 &recurring=y
 ```
 
-All except `key` are optional. If `amount` is included the user is shown the
+All except `key` are optional. If `value` is included the user is shown the
 payment page, if not, it is considered an mPOS case and a pre-screen is shown
 for manually setting the amount.
+
+`test` must be set for test accounts, and omitted in production.
+
+`recurring` is used to signal subscriptions or other "save card".
 
 [Most European languages are supported for the locale](https://paylike.io/features/payment-popup#languages),
 please open an issue to request others.
 
-Payment link example: https://pos.paylike.io/?key=ba21f7ac-095c-4941-3196-f6ba24effbaf&currency=DKK&amount=100&reference=order%20232&redirect=http://google.dk
+Payment link example: https://pos.paylike.io/?key=ba21f7ac-095c-4941-3196-f6ba24effbaf&test=1&currency=EUR&value=1.95&reference=order%20232&redirect=https://google.com
 
-mPOS link example: https://pos.paylike.io/?key=ba21f7ac-095c-4941-3196-f6ba24effbaf&currency=DKK&reference=order%20232
+mPOS link example: https://pos.paylike.io/?key=ba21f7ac-095c-4941-3196-f6ba24effbaf&test=1&currency=EUR&reference=order%20232
