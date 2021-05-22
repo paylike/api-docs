@@ -56,19 +56,19 @@ update.
 - [Lines](#lines)
 	- [Fetch a line](#fetch-a-line)
 - [Transactions](#transactions)
-	- [Create a transaction](#create-a-transaction)
+	- [Create a transaction](#create-a-transaction-incl-save-card-and-subscriptions)
 		- [From a web client (e.g. a webshop)](#from-a-web-client-eg-a-webshop)
 		- [From iOS, Android, another custom client or your server](#from-ios-android-another-custom-client-or-your-server)
 		- [Using a previous transaction](#using-a-previous-transaction)
-		- [Using a saved (tokenized) card](#using-a-saved-tokenized-card)
+		- [~Using a saved (tokenized) card~](#using-a-saved-tokenized-card-deprecated)
 	- [Capture a transaction](#capture-a-transaction)
 	- [Refund a transaction](#refund-a-transaction)
 	- [Void a transaction](#void-a-transaction)
 	- [Fetch all transactions](#fetch-all-transactions)
 	- [Fetch a transaction](#fetch-a-transaction)
-- [Cards](#cards)
-	- [Save a card](#save-a-card)
-	- [Fetch a card](#fetch-a-card)
+- [~Cards~](#cards-deprecated)
+	- [~Save a card~](#save-a-card-deprecated)
+	- [~Fetch a card~](#fetch-a-card-deprecated)
 - [Disputes](#disputes)
 	- [Fetch all disputes](#fetch-all-disputes)
 	- [Fetch a dispute](#fetch-a-dispute)
@@ -437,7 +437,7 @@ check the type of the action by looking at a property of the same name (e.g.
 `transaction.trails[0].capture === true`). Each entry also have an `amount`
 property.
 
-### Create a transaction
+### Create a transaction (incl. "save card" and subscriptions)
 
 #### From a web client (e.g. a webshop)
 
@@ -450,6 +450,9 @@ Please see the "payments" section of the
 [API reference](https://github.com/paylike/api-reference).
 
 #### Using a previous transaction
+
+The previous transaction should be the original transaction created by the
+customer during sign-up.
 
 Make sure to read about [recurring payments](#recurring-payments).
 
@@ -481,7 +484,10 @@ Will return:
 }
 ```
 
-#### Using a saved (tokenized) card
+#### Using a saved (tokenized) card (deprecated)
+
+**Deprecated: use the original transaction created by the customer during
+sign-up instead, as described above.**
 
 Make sure to read about [recurring payments](#recurring-payments).
 
@@ -675,12 +681,12 @@ Will return:
 }
 ```
 
-## Cards
+## Cards (deprecated)
 
-### Save a card
+**Deprecated: use previous transaction IDs to create subsequent transactions
+as described in the section on [recurring payments](#recurring-payments).**
 
-When using our [Web SDK](https://github.com/paylike/sdk) for saving cards you
-do not have to do anything further - the card will be in your vault.
+### Save a card (deprecated)
 
 The instructions below are for saving a card from an earlier transaction.
 
@@ -711,7 +717,7 @@ Will return:
 
 Once you have a card ID, you will be able to [create new transactions](#create-a-transaction).
 
-### Fetch a card
+### Fetch a card (deprecated)
 
 ```shell
 curl https://api.paylike.io/cards/<card-id> \
